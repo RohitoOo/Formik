@@ -1,28 +1,33 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
 
-class App extends Component {
+import { Formik, withFormik } from "formik"
+class App extends React.Component {
+  constructor(props) {
+    super()
+  }
   render() {
+    const { values, handleChange } = this.props
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        {console.log(this.props, values)}
+        <input
+          type="text"
+          name="name"
+          placeholder="name"
+          value={values.name}
+          onChange={handleChange}
+        />
       </div>
-    );
+    )
   }
 }
 
-export default App;
+const FormikApp = withFormik({
+  mapPropsToValues() {
+    return {
+      name: "Rohito"
+    }
+  }
+})(App)
+
+export default FormikApp
